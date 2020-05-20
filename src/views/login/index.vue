@@ -26,15 +26,15 @@
         />
       </el-form-item>
 
-      <!--大小写提示-->
-      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right">
+      <!--大小写提示Caps lock is On 右边-->
+      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
             <svg-icon icon-class="password" />
           </span>
           <!--@keyup.enter.native监听键盘事件-->
           <!--@keyup.native 组件得加上 .native 监听原生事件-->
-          <!--@blur 失去焦点触发-->
+          <!--@blur 失去焦点触发不显示-->
           <el-input
             :key="passwordType"
             ref="password"
@@ -54,17 +54,18 @@
         </el-form-item>
       </el-tooltip>
 
-      <!--loading:true or false, primary默认样式-->
-      <!--@click.native.prevent 阻止默认行为-->
+      <!--:loading 成功提交转圈圈效果, primary默认样式-->
+      <!--@click.native.prevent调用 event.preventDefault()-->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
     </el-form>
-
+      <router-link to="/register">Don't have an account? register</router-link>
+      <br>
+      <router-link to="/findPassword">Forget password? find</router-link>
   </div>
 </template>
 
 <script>
   import { validUsername } from '@/utils/validate'
-
   export default {
     name: 'Login',
     components: {
@@ -77,15 +78,16 @@
         } else {
           callback()
         }
-      }
+      };
       const validatePassword = (rule, value, callback) => {
         if (value.length < 6) {
           callback(new Error('The password can not be less than 6 digits'))
         } else {
           callback()
         }
-      }
+      };
       return {
+        //模拟账号密码
         loginForm: {
           username: 'user',
           password: '123456'
@@ -98,11 +100,16 @@
         passwordType: 'password',
         capsTooltip: false,
         loading: false,
-        redirect: undefined,
+        redirect:undefined
       }
     },
     watch: {
-
+      $route: {
+        handler: function(route) {
+          this.redirect = route.query && route.query.redirect
+        },
+        immediate: true
+      }
     },
     created() {
 
@@ -118,8 +125,9 @@
 
     },
     methods: {
-      //大小写
+      //绑定keyup.native事件,触发就监听大小写,改变capsTooltip值,然后是否提示
       checkCapslock(e) {
+        //取e对象中的key值
         const { key } = e;
         this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
       },
@@ -137,20 +145,23 @@
       },
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            this.loading = true
-            //this.$store.dispatch('user/login', this.loginForm)
-              .then(() => {
-                // this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-                this.loading = false
-              })
-              .catch(() => {
-                this.loading = false
-              })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
+          //vue.js element ui 表单验证
+           if (valid) {
+          //   // this.loading = true
+             console.log('dispatch');
+             this.$store.dispatch('user/login',this.loginForm).then(() => {
+               console.log('Cookie store');
+          //     this.$router.push({ path: '/'})
+          //     // this.loading = false
+             })
+          //     .catch(err => {
+          //       // this.loading = false
+          //       this.$message.error(err);
+          //     })
+          //  } else {
+          //    console.log('error submit!!');
+          //    return false
+            }
         })
       }
     }

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Index from '../views/index/index'
+
 Vue.use(Router);
 
 export default new Router({
@@ -12,6 +14,14 @@ export default new Router({
     {
       path: '/login',
       component:() => import('@/views/login/index'),
+    },
+    {
+      path: '/register',
+      component:() => import('@/views/login/register'),
+    },
+    {
+      path: '/findPassword',
+      component:() => import('@/views/login/forgetPassword'),
       hidden:true
     }
   ]
