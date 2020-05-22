@@ -19,7 +19,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  Cookie,
+  // Cookie,
   components: { App },
   template: '<App/>'
 });

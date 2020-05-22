@@ -18,8 +18,8 @@ const users = {
   }
 };
 
-export default [
-  // user login
+ export default [
+   // user login
   {
     url: '/user/login',
     type: 'post',
@@ -38,38 +38,38 @@ export default [
         data: token
       }
     }
-  },
-
-  // get user info
-  {
-    url: '/user/info\.*',
-    type: 'get',
-    response: config => {
-      const { token } = config.query;
-      const info = users[token];
-      // mock error
-      if (!info) {
-        return {
-          code: 50008,
-          message: 'Login failed, unable to get user details.'
-        }
-      }
-      return {
-        code: 20000,
-        data: info
-      }
-    }
-  },
-
-  // user logout
-  {
-    url: '/user/logout',
-    type: 'post',
-    response: _ => {
-      return {
-        code: 20000,
-        data: 'success'
-      }
-    }
   }
-]
+
+//   // get user info
+//   {
+//     url: '/user/info',
+//     type: 'get',
+//     response: config => {
+//       const { token } = config.query;
+//       const info = users[token];
+//       // mock error
+//       if (!info) {
+//         return {
+//           code: 50008,
+//           message: 'Login failed, unable to get user details.'
+//         }
+//       }
+//       return {
+//         code: 20000,
+//         data: info
+//       }
+//     }
+//   },
+//
+//   // user logout
+//   {
+//     url: '/user/logout',
+//     type: 'post',
+//     response: _ => {
+//       return {
+//         code: 20000,
+//         data: 'success'
+//       }
+//     }
+//   }
+ ]
