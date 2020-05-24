@@ -17,7 +17,7 @@ const createLintingRule = () => ({
   //   formatter: require('eslint-friendly-formatter'),
   //   emitWarning: !config.dev.showEslintErrorsInOverlay
   // }
-})
+});
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -35,7 +35,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('src')
     }
   },
   module: {
@@ -83,15 +83,15 @@ module.exports = {
         options: {
           symbolId: 'icon-[name]'
         }
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
       }
+      // {
+      //   test: /\.scss$/,
+      //   use: [
+      //     'vue-style-loader',
+      //     'css-loader',
+      //     'sass-loader'
+      //   ]
+      // }
     ]
   },
   node: {

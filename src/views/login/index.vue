@@ -66,7 +66,7 @@
 </template>
 
 <script>
-  import { validUsername } from '@/utils/validate'
+  import { validUsername } from '../../utils/validate'
   export default {
     name: 'Login',
     components: {
@@ -107,7 +107,8 @@
     watch: {
       // $route: {
       //   handler: function(route) {
-      //     this.redirect = route.query && route.query.redirect
+      //     console.log("watch:route"+route);
+      //     this.redirect = "/"
       //   },
       //   immediate: true
       // }
@@ -148,21 +149,21 @@
         this.$refs.loginForm.validate(valid => {
           //vue.js element ui 表单验证
            if (valid) {
-          //   // this.loading = true
+             // this.loading = true
              console.log('进入dispatch');
              // console.log(this.loginForm);
-             this.$store.dispatch('LoginByUsername',this.loginForm).then(() => {
-               console.log('Cookie store');
+             this.$store.dispatch('user/login',this.loginForm).then(() => {
+               console.log('进入Cookie store');
                this.$router.push({ path: '/'})
-          //     // this.loading = false
+               console.log('跳转首页 / ')
+               // this.loading = false
              })
-          //     .catch(err => {
-          //       // this.loading = false
-          //       this.$message.error(err);
-          //     })
-          //  } else {
-          //    console.log('error submit!!');
-          //    return false
+               .catch(() => {
+                // this.loading = false
+               })
+            } else {
+              console.log('error submit!!');
+              return false
             }
         })
       }

@@ -6,11 +6,18 @@ const path = require('path');
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // '/api':{
+      //   target: 'http://localhost:8888',   // target表示代理的服务器url
+      //   changeOrigin: true,   //跨域
+      //   pathRewrite: {
+      //     '^/api': '/'   // 即用 '/api'表示'http://localhost:8888/'
+      //   }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -50,7 +57,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

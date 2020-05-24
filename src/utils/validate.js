@@ -7,3 +7,11 @@ export function validUsername(str) {
   //身份验证，去掉str的头尾空白，看valid_map中是否包含改str,无返回-1
   return valid_map.indexOf(str.trim()) >= 0
 }
+
+/**
+ * @param {string} path
+ * @returns {Boolean}
+ */
+export function isExternal(path) {
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
