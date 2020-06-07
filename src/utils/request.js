@@ -16,9 +16,9 @@ service.interceptors.request.use(
     console.log("拿到Based_URL：");
     console.log(process.env.API_ROOT);
   // Do something before request is sent
-    if (store.getters.token) {
     console.log("request store.getters.token:");
     console.log(store.getters.token);
+    if (store.getters.token) {
     console.log("request getToken():");
     console.log(getToken());
     // config.headers['X-Token'] = getToken();

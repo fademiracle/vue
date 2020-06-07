@@ -13,6 +13,10 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const mutations = {
+  //状态重置，登出
+  RESET_STATE: (state) => {
+    Object.assign(state, getDefaultState())
+  },
   SET_TOKEN: (state, token) => {
     state.token = token
   },
@@ -70,13 +74,25 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         removeToken(); // must remove  token  first
+        //resetRouter()还没做
+        commit('RESET_STATE');
         resolve()
       }).catch(error => {
         reject(error)
       })
     })
+  },
+
+  // remove token
+  resetToken({ commit }) {
+    return new Promise(resolve => {
+      //先移除token,然后重置
+      removeToken();
+      commit('RESET_STATE');
+      resolve()
+    })
   }
-}
+};
 
 export default {
   namespaced: true,

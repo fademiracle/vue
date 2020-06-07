@@ -1,12 +1,12 @@
 <template>
-    <div class="shopping-container">
-      <h3>shopping-分销</h3>
+    <div class="menus1">
+      <p>menus1</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "menus1"
     }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="home-page-container">
-      <h3>homePage-首页</h3>
+    <div class="echarts-container">
+      <h3>echarts</h3>
       <div>
         <bar-chart />
       </div>
